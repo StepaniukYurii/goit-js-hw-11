@@ -8,18 +8,22 @@ const loader = document.querySelector('.loader');
 
 let lightbox;
 
-searchForm.addEventListener('submit', async event => {
+searchForm.addEventListener('submit', event => {
   event.preventDefault();
 
-  const query = searchInput.value.trim();
+  gallery.innerHTML = '';
   loader.style.display = 'block';
 
-  try {
-    const data = await fetchImages(query);
-    renderGalleryItems(data, gallery, lightbox);
-  } catch (error) {
-    console.log(error);
-  } finally {
-    loader.style.display = 'none';
-  }
+  const query = searchInput.value.trim();
+
+  fetchImages(query)
+    .then(data => {
+      renderGalleryItems(data, gallery, lightbox);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+    .finally(() => {
+      loader.style.display = 'none';
+    });
 });

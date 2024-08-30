@@ -4,8 +4,6 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
 export function renderGalleryItems(data, gallery, lightbox) {
-  gallery.innerHTML = '';
-
   if (data.hits.length === 0) {
     return iziToast.show({
       message:
